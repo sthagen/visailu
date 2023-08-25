@@ -1,0 +1,14 @@
+name: visailu
+description: Quiz (Finnish: visailu) data operations.
+license_spdx: MIT
+version: 2023.8.25
+spec_version: 1.0
+home_url: https://git.sr.ht/~sthagen/visailu
+news_url: https://libraries.io/pypi/visailu/versions.atom
+date: 2023-08-25
+about_resource: ./
+libraries_io_url: https://libraries.io/pypi/visailu?number=2023.8.25
+vcs_tool: git
+vcs_repository: https://git.sr.ht/~sthagen/visailu
+vcs_branch: default
+

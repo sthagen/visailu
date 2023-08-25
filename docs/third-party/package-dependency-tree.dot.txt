@@ -1,0 +1,3 @@
+digraph {
+	msgspec [label="msgspec\n0.16.0"]
+}

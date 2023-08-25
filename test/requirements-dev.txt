@@ -1,0 +1,57 @@
+GitPython==3.1.32
+Jinja2==3.1.2
+Pympler==1.0.1
+attrs==23.1.0
+bandit==1.7.5
+black==23.7.0
+bumper==0.1.13
+cattrs==23.1.2
+cogapp==3.3.0
+cyclonedx-bom==3.11.2
+filprofiler==2023.3.1
+first==2.0.2
+flake8==6.1.0
+flake8-quotes==3.3.2
+graphviz==0.20.1
+guppy3==3.1.3
+icdiff==2.0.7
+icecream==2.1.3
+ipdb==0.13.13
+ipython==8.14.0
+isort==5.12.0
+line-profiler==4.1.1
+memory-profiler==0.61.0
+mkautodoc==0.2.0
+mkdocstrings==0.22.0
+mypy==1.5.1
+objgraph==3.6.0
+packaging==23.1
+pdoc==14.0.0
+pip-licenses==4.3.2
+pip-requirements-parser==32.0.1
+pip-tools==7.3.0
+pipdeptree==2.13.0
+# prospector==1.8.1
+py-cpuinfo==9.0.0
+# py-sbom-components==0.2.1
+pycodestyle==2.11.0
+pydocstyle==6.3.0
+pyflakes==3.1.0
+pyinstrument==4.5.1
+pymdown-extensions==10.1
+pyupgrade==3.10.1
+railroad-diagrams==3.0.1
+# refurb==1.4.0
+ruff==0.0.285
+# scalene==1.5.21.4
+setuptools==68.1.2
+setuptools-scm==7.1.0
+twine==4.0.2
+types-Markdown==3.4.2.10
+types-PyYAML==6.0.12.11
+types-first==2.0.5.2
+types-jmespath==1.0.2.7
+types-requests==2.31.0.2
+types-setuptools==68.1.0.0
+types-toml==0.10.8.7
+validate-pyproject==0.14
