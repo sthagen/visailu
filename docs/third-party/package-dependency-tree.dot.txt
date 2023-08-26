@@ -1,3 +1,0 @@
-digraph {
-	pyyaml [label="PyYAML\n6.0.1"]
-}

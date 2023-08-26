@@ -1,8 +1,8 @@
 # Third Party Dependencies
 
 <!--[[[fill sbom_sha256()]]]-->
-The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/visailu/blob/default/etc/sbom/cdx.json) with SHA256 checksum ([42ff73de ...](https://git.sr.ht/~sthagen/visailu/blob/default/etc/sbom/cdx.json.sha256 "sha256:42ff73deae23eef5c64c061a48f10de2281aa800f923ad57b185fff1c4fe5391")).
-<!--[[[end]]] (checksum: 95bebcda87c34b3a16b878f4fa333165)-->
+The [SBOM in CycloneDX v1.4 JSON format](https://git.sr.ht/~sthagen/visailu/blob/default/etc/sbom/cdx.json) with SHA256 checksum ([1a0b8c62 ...](https://git.sr.ht/~sthagen/visailu/blob/default/etc/sbom/cdx.json.sha256 "sha256:1a0b8c6278910c27b1fd456ccf43b6bb5429c27c5fdd6ee856fee6360cfaaa9a")).
+<!--[[[end]]] (checksum: d1b31e9189480e18c81bd8938f97b90a)-->
 ## Licenses 
 
 JSON files with complete license info of: [direct dependencies](direct-dependency-licenses.json) | [all dependencies](all-dependency-licenses.json)
@@ -10,10 +10,10 @@ JSON files with complete license info of: [direct dependencies](direct-dependenc
 ### Direct Dependencies
 
 <!--[[[fill direct_dependencies_table()]]]-->
-| Name                          | Version                                         | License     | Author         | Description (from packaging data)  |
-|:------------------------------|:------------------------------------------------|:------------|:---------------|:-----------------------------------|
-| [PyYAML](https://pyyaml.org/) | [6.0.1](https://pypi.org/project/PyYAML/6.0.1/) | MIT License | Kirill Simonov | YAML parser and emitter for Python |
-<!--[[[end]]] (checksum: 70a4e2de46d2d9873f65720344de9b80)-->
+| Name                                       | Version                                        | License     | Author            | Description (from packaging data)                                  |
+|:-------------------------------------------|:-----------------------------------------------|:------------|:------------------|:-------------------------------------------------------------------|
+| [typer](https://github.com/tiangolo/typer) | [0.9.0](https://pypi.org/project/typer/0.9.0/) | MIT License | Sebastián Ramírez | Typer, build great CLIs. Easy to code. Based on Python type hints. |
+<!--[[[end]]] (checksum: 80e791c1fdef7665f4104495541de7b1)-->
 
 ### Indirect Dependencies
 
@@ -36,6 +36,6 @@ Base graphviz file in dot format: [Trees of the direct dependencies](package-dep
 
 <!--[[[fill dependency_tree_console_text()]]]-->
 ````console
-PyYAML==6.0.1
+
 ````
-<!--[[[end]]] (checksum: 184adbe4acf487c9ecae9f848440e355)-->
+<!--[[[end]]] (checksum: 3c785458cb78583f093698f578ae7d19)-->
