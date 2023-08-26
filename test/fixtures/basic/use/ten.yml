@@ -1,0 +1,80 @@
+---
+id: some-id-ten
+title: Some Title Ten
+meta:
+  scale:
+    domain: text
+    range: binary
+  defaults:
+    rating: false
+questions:
+- question: ABC1 stands for ...?
+  answers:
+  - answer: Alphabet1
+  - answer: A company1
+  - answer: A Bogus Car1
+    rating: true
+  - answer: Et cetera1
+- question: ABC2 stands for ...?
+  answers:
+  - answer: Alphabet2
+  - answer: A company2
+  - answer: A Bogus Car2
+    rating: true
+  - answer: Et cetera2
+- question: ABC3 stands for ...?
+  answers:
+  - answer: Alphabet3
+  - answer: A company3
+  - answer: A Bogus Car3
+    rating: true
+  - answer: Et cetera3
+- question: ABC4 stands for ...?
+  answers:
+  - answer: Alphabet4
+  - answer: A company4
+  - answer: A Bogus Car4
+    rating: true
+  - answer: Et cetera4
+- question: ABC5 stands for ...?
+  answers:
+  - answer: Alphabet5
+  - answer: A company5
+  - answer: A Bogus Car5
+    rating: true
+  - answer: Et cetera5
+- question: ABC6 stands for ...?
+  answers:
+  - answer: Alphabet6
+  - answer: A company6
+  - answer: A Bogus Car6
+    rating: true
+  - answer: Et cetera6
+- question: ABC7 stands for ...?
+  answers:
+  - answer: Alphabet7
+  - answer: A company7
+  - answer: A Bogus Car7
+    rating: true
+  - answer: Et cetera7
+- question: ABC8 stands for ...?
+  answers:
+  - answer: Alphabet8
+  - answer: A company8
+  - answer: A Bogus Car8
+    rating: true
+  - answer: Et cetera8
+- question: ABC9 stands for ...?
+  answers:
+  - answer: Alphabet9
+  - answer: A company9
+  - answer: A Bogus Car9
+    rating: true
+  - answer: Et cetera9
+- question: ABC10 stands for ...?
+  answers:
+  - answer: Alphabet10
+  - answer: A company10
+  - answer: A Bogus Car10
+    rating: true
+  - answer: Et cetera10

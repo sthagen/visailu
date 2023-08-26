@@ -1,6 +1,6 @@
 ---
-id: some-id
-title: Some Title
+id: some-id-minimal
+title: Some Title Minimal
 meta:
   scale:
     domain: text
