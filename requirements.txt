@@ -1,2 +1,2 @@
-requirements.txtPyYAML==6.0.1
+PyYAML==6.0.1
 typer==0.9.0
