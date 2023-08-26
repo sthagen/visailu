@@ -1,0 +1,31 @@
+[
+    {
+        "key": "pyyaml",
+        "package_name": "PyYAML",
+        "installed_version": "6.0.1",
+        "required_version": "6.0.1",
+        "dependencies": []
+    },
+    {
+        "key": "typer",
+        "package_name": "typer",
+        "installed_version": "0.9.0",
+        "required_version": "0.9.0",
+        "dependencies": [
+            {
+                "key": "click",
+                "package_name": "click",
+                "installed_version": "8.1.7",
+                "required_version": ">=7.1.1,<9.0.0",
+                "dependencies": []
+            },
+            {
+                "key": "typing-extensions",
+                "package_name": "typing-extensions",
+                "installed_version": "4.7.1",
+                "required_version": ">=3.7.4.3",
+                "dependencies": []
+            }
+        ]
+    }
+]
