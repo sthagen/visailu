@@ -1,0 +1,71 @@
+---
+id: some-id-questions-answers-counts-differing
+title: Questions Answers Counts Differing
+meta:
+  scale:
+    domain: text
+    range: binary
+  defaults:
+    rating: false
+questions:
+- question: ABC1 stands for ...?
+  answers:
+  - answer: Et cetera1
+    rating: true
+- question: ABC2 stands for ...?
+  answers:
+  - answer: A company2
+  - answer: A Bogus Car2
+    rating: true
+  - answer: Et cetera2
+- question: ABC3 stands for ...?
+  answers:
+  - answer: Alphabet3
+  - answer: A company3
+  - answer: A Bogus Car3
+    rating: true
+  - answer: Et cetera3
+- question: ABC4 stands for ...?
+  answers:
+  - answer: Alphabet4
+  - answer: A Bogus Car4
+    rating: true
+  - answer: Et cetera4
+- question: ABC5 stands for ...?
+  answers:
+  - answer: Alphabet5
+  - answer: Alphabet51
+  - answer: Alphabet52
+  - answer: Alphabet53
+  - answer: Alphabet54
+  - answer: Alphabet55
+  - answer: Alphabet56
+  - answer: Alphabet57
+  - answer: Alphabet58
+  - answer: A company5
+  - answer: A Bogus Car5
+    rating: true
+  - answer: Et cetera5
+- question: ABC6 stands for ...?
+  answers:
+  - answer: A Bogus Car6
+    rating: true
+- question: ABC7 stands for ...?
+  answers:
+  - answer: A Bogus Car7
+    rating: true
+  - answer: Et cetera7
+- question: ABC8 stands for ...?
+  answers:
+  - answer: AlphabetX8
+  - answer: Alphabet8
+  - answer: A company8
+  - answer: A Bogus Car8
+    rating: true
+  - answer: Et cetera8
+- question: ABC9 stands for ...?
+  answers:
+  - answer: Alphabet9
+  - answer: A Bogus Car9
+    rating: true
+  - answer: Et cetera9
