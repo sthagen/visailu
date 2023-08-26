@@ -7,7 +7,7 @@ Quiz (Finnish: visailu) data operations.
 Third party dependencies are documented in the folder [third-party](docs/third-party/README.md).
 
 [![version](https://img.shields.io/pypi/v/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
-[![downloads](https://static.static.pepy.tech/badge/visailu/month)](https://pepy.tech/project/visailu)
+[![downloads](https://static.pepy.tech/badge/visailu/month)](https://pepy.tech/project/visailu)
 [![wheel](https://img.shields.io/pypi/wheel/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
 [![supported-versions](https://img.shields.io/pypi/pyversions/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
 [![supported-implementations](https://img.shields.io/pypi/implementation/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
