@@ -1,0 +1,13 @@
+---
+id: some-id
+title: Some Title
+meta:
+  scale:
+    domain: text
+    range:
+    - false
+    - true
+  defaults:
+    rating: false
+questions:
+- question: ABC stands for ...?

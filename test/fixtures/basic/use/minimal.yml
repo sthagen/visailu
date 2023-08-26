@@ -1,0 +1,17 @@
+---
+id: some-id
+title: Some Title
+meta:
+  scale:
+    domain: text
+    range: binary
+  defaults:
+    rating: false
+questions:
+- question: ABC stands for ...?
+  answers:
+  - answer: Alphabet
+  - answer: A company
+  - answer: A Bogus Car
+    rating: true
+  - answer: Et cetera

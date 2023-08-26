@@ -1,0 +1,20 @@
+---
+id: model-meta-invalid-range
+title: Test for Model Meta Invalid Range
+meta:
+  scale:
+    domain: text
+    range:
+    - 1
+    - 2
+    - 3
+  defaults:
+    rating: false
+questions:
+- question: What ever
+  answers:
+  - answer: it
+  - answer: takes
+  - answer: to
+    rating: true
+  - answer: fail

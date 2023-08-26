@@ -1,0 +1,11 @@
+---
+id: some-id
+title: Some Title
+meta:
+  scale:
+    domain: text
+    range:
+    - false
+    - true
+  defaults:
+    rating: false

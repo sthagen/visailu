@@ -1,0 +1,17 @@
+---
+id: model-meta-invalid-range-default
+title: Test for Model Meta Invalid Range Default
+meta:
+  scale:
+    domain: text
+    range: 'fraction'
+  defaults:
+    rating: 'sometimes a number is not enough'
+questions:
+- question: What ever
+  answers:
+  - answer: it
+  - answer: takes
+  - answer: to
+    rating: 1
+  - answer: fail

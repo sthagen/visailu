@@ -1,0 +1,17 @@
+---
+id: model-question-invalid-range
+title: Test for Model Question Invalid Range
+meta:
+  scale:
+    domain: text
+    range: 'fraction'
+  defaults:
+    rating: 0
+questions:
+- question: What ever
+  answers:
+  - answer: it
+  - answer: takes
+  - answer: to
+    rating: 42
+  - answer: fail
