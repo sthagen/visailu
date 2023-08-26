@@ -148,6 +148,10 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
 
     id_export = 1
     quiz_export: QuestionExportType = []
+    num_questions = len(questions)
+    if num_questions < 10 or 10 < num_questions:
+        problem = 'too few' if num_questions < 10 else 'too many'
+        log.warning(f'model with {problem} questions {num_questions} instead of 10')
     for entry in questions:
         question = entry.get('question', '')
         answers = entry.get('answers', [])
@@ -181,6 +185,10 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
             'question': question,
             'options': [],
         }
+        num_answers = len(answers)
+        if num_answers < 4 or 4 < num_answers:
+            problem = 'too few' if num_answers < 4 else 'too many'
+            log.warning(f'model with {problem} answers {num_answers} instead of 4 at question {id_export}')
         for option in answers:
             answer = option.get('answer', '')
             rating = option.get('rating')
@@ -207,6 +215,9 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
         id_export += 1
         if id_export > 10:
             break
+
+    if len(quiz_export) < 10:
+        log.warning(f'quiz with too few questions {len(quiz_export)} instead of 10')
 
     return True, '', quiz_export
 
