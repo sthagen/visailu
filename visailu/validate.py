@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """Validate the YAML file against the model for quiz data."""
 import pathlib
 import sys
@@ -6,17 +5,22 @@ from typing import Any, no_type_check
 
 import yaml
 
-INVALID_YAML_RESOURCE = 'is invalid yaml or the resource is inaccessible'
-MODEL_META_INVALID_DEFAULTS = 'contains invalid defaults for scale in meta'
-MODEL_META_INVALID_RANGE = 'contains an invalid range of scale in meta'
-MODEL_META_INVALID_RANGE_VALUE = 'contains an invalid default value for the scale'
-MODEL_QUESTION_ANSWER_MISSING = 'misses an answer'
-MODEL_QUESTION_ANSWER_MISSING_RATING = 'misses a rating for an answer'
-MODEL_QUESTION_INCOMPLETE = 'has incomplete questions'
-MODEL_QUESTION_INVALID_RANGE = 'contains an invalid range value for the scale'
-MODEL_QUESTION_INVALID_RANGE_VALUE = 'contains an invalid answer rating for the scale'
-MODEL_STRUCTURE_UNEXPECTED = 'has unexpected model structure'
-MODEL_VALUES_MISSING = 'misses model values'
+from visailu import (
+    INVALID_YAML_RESOURCE,
+    MODEL_META_INVALID_DEFAULTS,
+    MODEL_META_INVALID_RANGE,
+    MODEL_META_INVALID_RANGE_VALUE,
+    MODEL_QUESTION_ANSWER_MISSING,
+    MODEL_QUESTION_ANSWER_MISSING_RATING,
+    MODEL_QUESTION_INCOMPLETE,
+    MODEL_QUESTION_INVALID_RANGE,
+    MODEL_QUESTION_INVALID_RANGE_VALUE,
+    MODEL_STRUCTURE_UNEXPECTED,
+    MODEL_VALUES_MISSING,
+    log,
+    slugify,
+)
+from visailu.verify import verify as verify_path
 
 
 @no_type_check
@@ -24,15 +28,6 @@ def load(path: str):
     """Load the data structure from YAML file at path."""
     with pathlib.Path(path).open('rt', encoding='utf-8') as handle:
         return yaml.safe_load(handle)
-
-
-def verify(path: str) -> bool:
-    """Drive the verification."""
-    try:
-        load(path)
-    except (RuntimeError, yaml.scanner.ScannerError):
-        return False
-    return True
 
 
 @no_type_check
@@ -101,7 +96,7 @@ def validate_defaults(target_type, maps_to, default_rating):
     return True, ''
 
 
-def validate(path: str) -> tuple[bool, str]:
+def _validate(path: str) -> tuple[bool, str]:
     """Validate the data against the model."""
     try:
         data = load(path)
@@ -171,20 +166,16 @@ def validate(path: str) -> tuple[bool, str]:
     return True, ''
 
 
-def main(path: str) -> int:
+@no_type_check
+def validate(path: str, options=None) -> tuple[bool, str]:
     """Drive the model validation."""
-    if not verify(path):
-        print(f'path({path}) is no well-formed yaml')
-        return 2
+    if not verify_path(path):
+        return False, INVALID_YAML_RESOURCE
 
-    ok, message = validate(path)
+    ok, message = _validate(path)
     if not ok:
-        print(f'path({path}) {message}')
-        return 1
+        log.error(f'path({path}) {message}')
+        return ok, message
 
-    print(f'path({path}) is valid quiz data')
-    return 0
-
-
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1]))
+    log.info(f'path({path}) is valid quiz data')
+    return ok, ''

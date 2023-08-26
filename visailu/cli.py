@@ -6,6 +6,7 @@ import sys
 import typer
 
 from visailu import APP_NAME, QUIET, __version__ as APP_VERSION, log
+from visailu.validate import validate as validate_path
 from visailu.verify import verify as verify_path
 
 app = typer.Typer(
@@ -104,6 +105,28 @@ def verify(  # noqa
         return code
 
     if verify_path(path, options=options):
+        return 0
+    return 1
+
+
+@app.command('validate')
+def validate(  # noqa
+    doc_path_pos: str = typer.Argument(''),
+    doc_path: str = DocumentPath,
+    verbose: bool = Verbosity,
+    strict: bool = Strictness,
+) -> int:
+    """
+    Verify the model data against YAML syntax.
+    """
+    code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
+    if code:
+        log.error(message)
+        return code
+
+    ok, _ = validate_path(path, options=options)
+
+    if ok:
         return 0
     return 1
 

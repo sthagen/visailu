@@ -34,6 +34,20 @@ TS_FORMAT_PAYLOADS = '%Y-%m-%d %H:%M:%S.%f UTC'
 VERSION = __version__
 VERSION_INFO = __version_info__
 
+# messages registry:
+INVALID_YAML_RESOURCE = 'is invalid yaml or the resource is inaccessible'
+MODEL_META_INVALID_DEFAULTS = 'contains invalid defaults for scale in meta'
+MODEL_META_INVALID_RANGE = 'contains an invalid range of scale in meta'
+MODEL_META_INVALID_RANGE_VALUE = 'contains an invalid default value for the scale'
+MODEL_QUESTION_ANSWER_MISSING = 'misses an answer'
+MODEL_QUESTION_ANSWER_MISSING_RATING = 'misses a rating for an answer'
+MODEL_QUESTION_INCOMPLETE = 'has incomplete questions'
+MODEL_QUESTION_INVALID_RANGE = 'contains an invalid range value for the scale'
+MODEL_QUESTION_INVALID_RANGE_VALUE = 'contains an invalid answer rating for the scale'
+MODEL_STRUCTURE_UNEXPECTED = 'has unexpected model structure'
+MODEL_VALUES_MISSING = 'misses model values'
+
+
 __all__: List[str] = [
     'APP_ALIAS',
     'APP_ENV',
@@ -42,6 +56,17 @@ __all__: List[str] = [
     'DEFAULT_CONFIG_NAME',
     'DEFAULT_STRUCTURE_NAME',
     'ENCODING',
+    'INVALID_YAML_RESOURCE',
+    'MODEL_META_INVALID_DEFAULTS',
+    'MODEL_META_INVALID_RANGE',
+    'MODEL_META_INVALID_RANGE_VALUE',
+    'MODEL_QUESTION_ANSWER_MISSING',
+    'MODEL_QUESTION_ANSWER_MISSING_RATING',
+    'MODEL_QUESTION_INCOMPLETE',
+    'MODEL_QUESTION_INVALID_RANGE',
+    'MODEL_QUESTION_INVALID_RANGE_VALUE',
+    'MODEL_STRUCTURE_UNEXPECTED',
+    'MODEL_VALUES_MISSING',
     'log',
 ]
 
