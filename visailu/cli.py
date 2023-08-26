@@ -6,6 +6,7 @@ import sys
 import typer
 
 from visailu import APP_NAME, QUIET, __version__ as APP_VERSION, log
+from visailu.publish import publish as publish_path
 from visailu.validate import validate as validate_path
 from visailu.verify import verify as verify_path
 
@@ -117,7 +118,7 @@ def validate(  # noqa
     strict: bool = Strictness,
 ) -> int:
     """
-    Verify the model data against YAML syntax.
+    Validate the YAML data against the model.
     """
     code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
     if code:
@@ -125,6 +126,28 @@ def validate(  # noqa
         return code
 
     ok, _ = validate_path(path, options=options)
+
+    if ok:
+        return 0
+    return 1
+
+
+@app.command('publish')
+def publish(  # noqa
+    doc_path_pos: str = typer.Argument(''),
+    doc_path: str = DocumentPath,
+    verbose: bool = Verbosity,
+    strict: bool = Strictness,
+) -> int:
+    """
+    Publish the model data in simplified JSON syntax.
+    """
+    code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
+    if code:
+        log.error(message)
+        return code
+
+    ok, _ = publish_path(path, options=options)
 
     if ok:
         return 0
