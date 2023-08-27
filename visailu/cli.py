@@ -68,16 +68,13 @@ def _verify_call_vector(
     if not doc and doc_path_pos:
         doc = doc_path_pos
     if not doc:
-        print('Document path required', file=sys.stderr)
         return 2, 'Document path required', '', {}
 
     doc_path_path = pathlib.Path(doc)
     if doc_path_path.exists():
         if not doc_path_path.is_file():
-            print(f'requested model file path at ({doc}) is not a file', file=sys.stderr)
             return 2, f'requested model file path at ({doc}) is not a file', '', {}
     else:
-        print(f'requested model file path at ({doc}) does not exist', file=sys.stderr)
         return 2, f'requested model file path at ({doc}) does not exist', '', {}
 
     options = {
@@ -101,13 +98,14 @@ def verify(  # noqa
     Verify the model data against YAML syntax.
     """
     code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
+    log.error(f'{code=}, {message=}')
     if code:
         log.error(message)
-        return code
+        raise typer.Exit(code=code)
 
     if verify_path(path, options=options):
-        return 0
-    return 1
+        raise typer.Exit(code=0)
+    raise typer.Exit(code=1)
 
 
 @app.command('validate')
@@ -123,13 +121,13 @@ def validate(  # noqa
     code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
     if code:
         log.error(message)
-        return code
+        raise typer.Exit(code=code)
 
     ok, _ = validate_path(path, options=options)
 
     if ok:
-        return 0
-    return 1
+        raise typer.Exit(code=0)
+    raise typer.Exit(code=1)
 
 
 @app.command('publish')
@@ -145,13 +143,13 @@ def publish(  # noqa
     code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
     if code:
         log.error(message)
-        return code
+        raise typer.Exit(code=code)
 
     ok, _ = publish_path(path, options=options)
 
     if ok:
-        return 0
-    return 1
+        raise typer.Exit(code=0)
+    raise typer.Exit(code=1)
 
 
 @app.command('version')
