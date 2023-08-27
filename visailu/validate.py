@@ -1,6 +1,5 @@
 """Validate the YAML file against the model for quiz data."""
 import pathlib
-import sys
 from typing import Any, no_type_check
 
 import yaml
@@ -18,7 +17,6 @@ from visailu import (
     MODEL_STRUCTURE_UNEXPECTED,
     MODEL_VALUES_MISSING,
     log,
-    slugify,
 )
 from visailu.verify import verify as verify_path
 

@@ -10,10 +10,17 @@ runner = CliRunner()
 TEST_PREFIX = pathlib.Path('test', 'fixtures', 'basic')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
+MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
+MODEL_MISSING_ANSWERS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-answers.yml')
+MODEL_MISSING_ID_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-id.yml')
+MODEL_MISSING_QUESTIONS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-questions.yml')
+MODEL_MISSING_TITLE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-title.yml')
+MODEL_QUESTION_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-question-invalid-range.yml')
 MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
 EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
 ONE_MORE_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'eleven.yml')
 VARYING_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'questions-answers-counts-differing.yml')
+
 
 def test_version_ok():
     result = runner.invoke(app, ['version'])
@@ -93,8 +100,38 @@ def test_validate_varying_model():
     assert result.exit_code == 0
 
 
-def test_validate_bad_model():
+def test_validate_bad_model_meta_invalid_range_default():
     result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_RANGE_DEFAULT_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_meat_invalid_range():
+    result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_RANGE_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_answers():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_ANSWERS_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_id():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_ID_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_questions():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_QUESTIONS_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_title():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_TITLE_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_question_invalid_range():
+    result = runner.invoke(app, ['validate', str(MODEL_QUESTION_INVALID_RANGE_PATH)])
     assert result.exit_code == 1
 
 
@@ -144,8 +181,38 @@ def test_publish_varying_model():
     assert result.exit_code == 0
 
 
-def test_publish_bad_model():
+def test_publish_bad_model_meta_invalid_range_default():
     result = runner.invoke(app, ['publish', str(MODEL_META_INVALID_RANGE_DEFAULT_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_meat_invalid_range():
+    result = runner.invoke(app, ['publish', str(MODEL_META_INVALID_RANGE_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_missing_answers():
+    result = runner.invoke(app, ['publish', str(MODEL_MISSING_ANSWERS_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_missing_id():
+    result = runner.invoke(app, ['publish', str(MODEL_MISSING_ID_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_missing_questions():
+    result = runner.invoke(app, ['publish', str(MODEL_MISSING_QUESTIONS_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_missing_title():
+    result = runner.invoke(app, ['publish', str(MODEL_MISSING_TITLE_PATH)])
+    assert result.exit_code == 1
+
+
+def test_publish_bad_model_question_invalid_range():
+    result = runner.invoke(app, ['publish', str(MODEL_QUESTION_INVALID_RANGE_PATH)])
     assert result.exit_code == 1
 
 

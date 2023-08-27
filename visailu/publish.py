@@ -27,7 +27,6 @@ Target format is a naive 10 question array with 4 options each array:
 """
 import json
 import pathlib
-import sys
 from typing import Any, Union, no_type_check
 
 import yaml
@@ -45,7 +44,6 @@ from visailu import (
     MODEL_STRUCTURE_UNEXPECTED,
     MODEL_VALUES_MISSING,
     log,
-    slugify,
 )
 from visailu.validate import validate as validate_path
 from visailu.verify import verify as verify_path
