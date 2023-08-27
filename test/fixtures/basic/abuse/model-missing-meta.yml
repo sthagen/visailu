@@ -1,0 +1,11 @@
+---
+id: some-id-model-missing-meta
+title: Some Title Model Missing Meta
+questions:
+- question: ABC stands for ...?
+  answers:
+  - answer: Alphabet
+  - answer: A company
+  - answer: A Bogus Car
+  - answer: Et cetera
+    rating: true

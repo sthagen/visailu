@@ -1,0 +1,23 @@
+---
+id: some-id-rococo
+title: Some Title Rococo
+meta:
+  scale:
+    domain: text
+    range: fraction
+  defaults:
+    rating: [0, 1]
+questions:
+- question: ABC stands for ...?
+  meta:
+    scale:
+      domain: text
+      range: binary
+    defaults:
+      rating: false
+  answers:
+  - answer: Alphabet
+  - answer: A company
+  - answer: A Bogus Car
+    rating: true
+  - answer: Et cetera

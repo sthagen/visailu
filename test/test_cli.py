@@ -8,19 +8,22 @@ from visailu.cli import app
 runner = CliRunner()
 
 TEST_PREFIX = pathlib.Path('test', 'fixtures', 'basic')
+
 EMPTY_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'empty.yml')
+EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
+MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
 MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
 MODEL_META_MISSING_DEFAULTS = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-missing-defaults.yml')
 MODEL_MISSING_ANSWERS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-answers.yml')
 MODEL_MISSING_ID_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-id.yml')
+MODEL_MISSING_META_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-meta.yml')
 MODEL_MISSING_QUESTIONS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-questions.yml')
 MODEL_MISSING_TITLE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-title.yml')
 MODEL_QUESTION_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-question-invalid-range.yml')
-MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
-EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
 ONE_MORE_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'eleven.yml')
+ROCOCO_PATH = pathlib.Path(TEST_PREFIX, 'use', 'rococo.yml')
 VARYING_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'questions-answers-counts-differing.yml')
 
 
@@ -107,6 +110,11 @@ def test_validate_varying_model():
     assert result.exit_code == 0
 
 
+def test_validate_rococo_model():
+    result = runner.invoke(app, ['validate', str(ROCOCO_PATH)])
+    assert result.exit_code == 0
+
+
 def test_validate_bad_model_meta_invalid_range_default():
     result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_RANGE_DEFAULT_PATH)])
     assert result.exit_code == 1
@@ -129,6 +137,11 @@ def test_validate_bad_model_missing_answers():
 
 def test_validate_bad_model_missing_id():
     result = runner.invoke(app, ['validate', str(MODEL_MISSING_ID_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_meta():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_META_PATH)])
     assert result.exit_code == 1
 
 
