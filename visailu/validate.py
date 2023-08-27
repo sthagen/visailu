@@ -21,13 +21,6 @@ from visailu.verify import verify_path
 
 
 @no_type_check
-def load(path: str):
-    """Load the data structure from YAML file at path."""
-    with pathlib.Path(path).open('rt', encoding='utf-8') as handle:
-        return yaml.safe_load(handle)
-
-
-@no_type_check
 def parse_scale_range(scale) -> tuple[bool | float | None, list[Any]]:
     """Parse a scale range declaration.
     Returns a tuple (ordered pair) of target type and target range
