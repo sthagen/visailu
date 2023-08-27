@@ -12,6 +12,7 @@ EMPTY_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'empty.yml')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
 MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
+MODEL_META_MISSING_DEFAULTS = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-missing-defaults.yml')
 MODEL_MISSING_ANSWERS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-answers.yml')
 MODEL_MISSING_ID_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-id.yml')
 MODEL_MISSING_QUESTIONS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-questions.yml')
@@ -111,8 +112,13 @@ def test_validate_bad_model_meta_invalid_range_default():
     assert result.exit_code == 1
 
 
-def test_validate_bad_model_meat_invalid_range():
+def test_validate_bad_model_meta_invalid_range():
     result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_RANGE_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_meta_missing_defaults():
+    result = runner.invoke(app, ['validate', str(MODEL_META_MISSING_DEFAULTS)])
     assert result.exit_code == 1
 
 

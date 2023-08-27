@@ -1,0 +1,15 @@
+---
+id: some-id-model-meta-missing-defaults
+title: Some Title Model Meta Missing Defaults
+meta:
+  scale:
+    domain: text
+    range: binary
+questions:
+- question: ABC stands for ...?
+  answers:
+  - answer: Alphabet
+  - answer: A company
+  - answer: A Bogus Car
+  - answer: Et cetera
+    rating: true
