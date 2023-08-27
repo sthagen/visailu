@@ -131,7 +131,7 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
     """Extract, load, and transform the data."""
     try:
         data = load(path)
-    except RuntimeError:
+    except RuntimeError:  # pragma: no cover
         return False, INVALID_YAML_RESOURCE, []
 
     try:

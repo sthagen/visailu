@@ -98,7 +98,7 @@ def _validate(path: str) -> tuple[bool, str]:
     """Validate the data against the model."""
     try:
         data = load(path)
-    except RuntimeError:
+    except RuntimeError:  # pragma: no cover
         return False, INVALID_YAML_RESOURCE
 
     try:
