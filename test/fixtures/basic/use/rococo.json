@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "question": "ABC stands for ...?",
+    "options": [
+      {
+        "answer": "Alphabet",
+        "isCorrect": 100
+      },
+      {
+        "answer": "A company",
+        "isCorrect": 100
+      },
+      {
+        "answer": "A Bogus Car",
+        "isCorrect": 66.6667
+      },
+      {
+        "answer": "Et cetera",
+        "isCorrect": 100
+      }
+    ]
+  }
+]

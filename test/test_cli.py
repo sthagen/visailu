@@ -1,5 +1,7 @@
+import json
 import pathlib
 
+import pytest
 from typer.testing import CliRunner
 
 import visailu
@@ -10,9 +12,7 @@ runner = CliRunner()
 TEST_PREFIX = pathlib.Path('test', 'fixtures', 'basic')
 
 EMPTY_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'empty.yml')
-EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
-MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
 MODEL_META_INVALID_DOMAIN_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-domain.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
 MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
@@ -24,9 +24,18 @@ MODEL_MISSING_META_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-meta
 MODEL_MISSING_QUESTIONS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-questions.yml')
 MODEL_MISSING_TITLE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-title.yml')
 MODEL_QUESTION_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-question-invalid-range.yml')
+
+EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
+MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
 ONE_MORE_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'eleven.yml')
-ROCOCO_PATH = pathlib.Path(TEST_PREFIX, 'use', 'rococo.yml')
+ROCOCO_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'rococo.yml')
 VARYING_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'questions-answers-counts-differing.yml')
+
+EXACT_QUIZ_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.json')
+MINIMAL_QUIZ_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.json')
+ONE_MORE_QUIZ_PATH = pathlib.Path(TEST_PREFIX, 'use', 'eleven.json')
+ROCOCO_QUIZ_PATH = pathlib.Path(TEST_PREFIX, 'use', 'rococo.json')
+VARYING_QUIZ_PATH = pathlib.Path(TEST_PREFIX, 'use', 'questions-answers-counts-differing.json')
 
 
 def test_version_ok():
@@ -113,7 +122,7 @@ def test_validate_varying_model():
 
 
 def test_validate_rococo_model():
-    result = runner.invoke(app, ['validate', str(ROCOCO_PATH)])
+    result = runner.invoke(app, ['validate', str(ROCOCO_MODEL_PATH)])
     assert result.exit_code == 0
 
 
@@ -203,18 +212,41 @@ def test_publish_bad_yaml():
     assert result.exit_code == 1
 
 
-def test_publish_minimal_model():
+def test_publish_minimal_model(caplog):
     result = runner.invoke(app, ['publish', str(MINIMAL_MODEL_PATH)])
     assert result.exit_code == 0
+    generated = json.load((pathlib.Path('build') / MINIMAL_QUIZ_PATH.name).open('rt', encoding='utf-8'))
+    expected = json.load(MINIMAL_QUIZ_PATH.open('rt', encoding='utf-8'))
+    assert generated == expected
+    for record in caplog.records:
+        assert record.levelname in ('INFO', 'WARNING')
+    assert 'model with too few questions 1 instead of 10' in caplog.text
+    assert 'quiz with too few questions 1 instead of 10' in caplog.text
 
 
-def test_publish_exact_model():
+def test_publish_exact_model(caplog):
     result = runner.invoke(app, ['publish', str(EXACT_MODEL_PATH)])
     assert result.exit_code == 0
+    generated = json.load((pathlib.Path('build') / EXACT_QUIZ_PATH.name).open('rt', encoding='utf-8'))
+    expected = json.load(EXACT_QUIZ_PATH.open('rt', encoding='utf-8'))
+    assert generated == expected
+    for record in caplog.records:
+        assert record.levelname == 'INFO'
 
 
-def test_publish_one_more_model():
+def test_publish_one_more_model(caplog):
     result = runner.invoke(app, ['publish', str(ONE_MORE_MODEL_PATH)])
+    assert result.exit_code == 0
+    generated = json.load((pathlib.Path('build') / ONE_MORE_QUIZ_PATH.name).open('rt', encoding='utf-8'))
+    expected = json.load(ONE_MORE_QUIZ_PATH.open('rt', encoding='utf-8'))
+    assert generated == expected
+    for record in caplog.records:
+        assert record.levelname in ('INFO', 'WARNING')
+    assert 'model with too many questions 11 instead of 10' in caplog.text
+
+
+def test_publish_rococo_model():
+    result = runner.invoke(app, ['publish', str(ROCOCO_MODEL_PATH)])
     assert result.exit_code == 0
 
 
