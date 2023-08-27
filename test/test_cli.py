@@ -245,14 +245,36 @@ def test_publish_one_more_model(caplog):
     assert 'model with too many questions 11 instead of 10' in caplog.text
 
 
-def test_publish_rococo_model():
+def test_publish_rococo_model(caplog):
     result = runner.invoke(app, ['publish', str(ROCOCO_MODEL_PATH)])
     assert result.exit_code == 0
+    generated = json.load((pathlib.Path('build') / ROCOCO_QUIZ_PATH.name).open('rt', encoding='utf-8'))
+    expected = json.load(ROCOCO_QUIZ_PATH.open('rt', encoding='utf-8'))
+    assert generated == expected
+    for record in caplog.records:
+        assert record.levelname in ('INFO', 'WARNING')
+    assert 'model with too few questions 1 instead of 10' in caplog.text
+    assert 'quiz with too few questions 1 instead of 10' in caplog.text
 
 
-def test_publish_varying_model():
+def test_publish_varying_model(caplog):
     result = runner.invoke(app, ['publish', str(VARYING_MODEL_PATH)])
     assert result.exit_code == 0
+    generated = json.load((pathlib.Path('build') / VARYING_QUIZ_PATH.name).open('rt', encoding='utf-8'))
+    expected = json.load(VARYING_QUIZ_PATH.open('rt', encoding='utf-8'))
+    assert generated == expected
+    for record in caplog.records:
+        assert record.levelname in ('INFO', 'WARNING')
+    assert 'model with too few questions 9 instead of 10' in caplog.text
+    assert 'model with too few answers 1 instead of 4 at question 1' in caplog.text
+    assert 'model with too few answers 3 instead of 4 at question 2' in caplog.text
+    assert 'model with too few answers 3 instead of 4 at question 4' in caplog.text
+    assert 'model with too many answers 12 instead of 4 at question 5' in caplog.text
+    assert 'model with too few answers 1 instead of 4 at question 6' in caplog.text
+    assert 'model with too few answers 2 instead of 4 at question 7' in caplog.text
+    assert 'model with too many answers 5 instead of 4 at question 8' in caplog.text
+    assert 'model with too few answers 3 instead of 4 at question 9' in caplog.text
+    assert 'quiz with too few questions 9 instead of 10' in caplog.text
 
 
 def test_publish_bad_model_meta_invalid_range_default():
