@@ -44,77 +44,17 @@ from visailu import (
     MODEL_VALUES_MISSING,
     log,
 )
-from visailu.validate import validate_path
+from visailu.validate import (
+    effective_meta,
+    parse_defaults,
+    parse_scale_range,
+    validate_defaults,
+    validate_path,
+)
 
 AnswerExportType = list[dict[str, Union[str, bool]]]
 QuestionExportType = dict[str, Union[int, str, AnswerExportType]]
 QuizExportType = list[QuestionExportType]
-
-
-@no_type_check
-def parse_scale_range(scale) -> tuple[bool | float | None, list[Any]]:
-    """Parse a scale range declaration.
-    Returns a tuple (ordered pair) of target type and target range
-    target range: Expecting either a list (ordered pair) with low and high or
-    a string value from magic keywords to derive such a pair from.
-    A failed parse returns tuple with None and an empty list.
-    Any target range given as list on input is understood as logical values.
-    """
-    maps_to = scale.get('range', None)
-    if maps_to is None:
-        return None, []
-    if isinstance(maps_to, list):
-        if len(maps_to) != 2:
-            return None, []
-        return bool, maps_to  # As documented
-    type_code = maps_to.lower().strip()
-    if type_code in ('binary', 'bool', 'boolean'):
-        return bool, [False, True]
-    if type_code in ('fract', 'fraction', 'relative'):
-        return float, [0, 1]
-    if type_code in ('perc', 'percentage'):
-        return float, [0, 100]
-    return None, []
-
-
-@no_type_check
-def effective_meta(data, entry):
-    """Walk upwards until meta discovered."""
-    meta = entry.get('meta')
-    if meta is None:
-        meta = data.get('meta')
-    return meta
-
-
-@no_type_check
-def parse_defaults(meta):
-    """Parse the effective defaults from the meta data."""
-    defaults = meta.get('defaults')
-    if defaults:
-        default_rating = defaults.get('rating', None)
-        target_type, maps_to = parse_scale_range(meta.get('scale'))
-        return target_type, maps_to, default_rating
-    return None, [], None
-
-
-@no_type_check
-def validate_defaults(target_type, maps_to, default_rating):
-    """Validate the default for consistency."""
-    if target_type is None or not maps_to:
-        return False, MODEL_META_INVALID_RANGE
-    if target_type is bool:
-        if default_rating not in maps_to:
-            return False, MODEL_META_INVALID_RANGE_VALUE
-    if target_type is float:
-        try:
-            val = float(default_rating)
-            if not isinstance(default_rating, (int, float)) or default_rating is False or default_rating is True:
-                return False, MODEL_META_INVALID_RANGE_VALUE
-        except (TypeError, ValueError):
-            return False, MODEL_META_INVALID_RANGE_VALUE
-        if not maps_to[0] <= val <= maps_to[1]:
-            return False, MODEL_META_INVALID_RANGE_VALUE
-    return True, ''
 
 
 @no_type_check
