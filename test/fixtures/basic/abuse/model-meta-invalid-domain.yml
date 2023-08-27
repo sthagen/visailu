@@ -1,0 +1,17 @@
+---
+id: model-meta-invalid-domain
+title: Test for Model Meta Invalid Domain
+meta:
+  scale:
+    domain: unseen-domain
+    range: float
+  defaults:
+    rating: null
+questions:
+- question: What ever
+  answers:
+  - answer: it
+  - answer: takes
+  - answer: to
+    rating: true
+  - answer: fail

@@ -13,6 +13,7 @@ EMPTY_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'empty.yml')
 EXACT_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'ten.yml')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
 MINIMAL_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'minimal.yml')
+MODEL_META_INVALID_DOMAIN_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-domain.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
 MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
 MODEL_META_MISSING_DEFAULTS = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-missing-defaults.yml')
@@ -20,6 +21,7 @@ MODEL_MISSING_ANSWERS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-a
 MODEL_MISSING_ID_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-id.yml')
 MODEL_MISSING_META_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-meta.yml')
 MODEL_MISSING_QUESTIONS_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-questions.yml')
+MODEL_MISSING_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-range.yml')
 MODEL_MISSING_TITLE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-missing-title.yml')
 MODEL_QUESTION_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-question-invalid-range.yml')
 ONE_MORE_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'use', 'eleven.yml')
@@ -115,6 +117,11 @@ def test_validate_rococo_model():
     assert result.exit_code == 0
 
 
+def test_validate_bad_model_meta_invalid_domain():
+    result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_DOMAIN_PATH)])
+    assert result.exit_code == 1
+
+
 def test_validate_bad_model_meta_invalid_range_default():
     result = runner.invoke(app, ['validate', str(MODEL_META_INVALID_RANGE_DEFAULT_PATH)])
     assert result.exit_code == 1
@@ -147,6 +154,11 @@ def test_validate_bad_model_missing_meta():
 
 def test_validate_bad_model_missing_questions():
     result = runner.invoke(app, ['validate', str(MODEL_MISSING_QUESTIONS_PATH)])
+    assert result.exit_code == 1
+
+
+def test_validate_bad_model_missing_range():
+    result = runner.invoke(app, ['validate', str(MODEL_MISSING_RANGE_PATH)])
     assert result.exit_code == 1
 
 

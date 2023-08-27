@@ -1,23 +1,16 @@
 ---
-id: some-id-rococo
-title: Some Title Rococo
+id: some-id-model-meta-missing-range
+title: Some Title Model Meta Missing Range
 meta:
   scale:
     domain: text
-    range: binary
   defaults:
     rating: false
 questions:
 - question: ABC stands for ...?
-  meta:
-    scale:
-      domain: text
-      range: percentage
-    defaults:
-      rating: 100
   answers:
   - answer: Alphabet
   - answer: A company
   - answer: A Bogus Car
-    rating: 66.6667
   - answer: Et cetera
+    rating: true
