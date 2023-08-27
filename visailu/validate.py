@@ -1,8 +1,5 @@
-"""Validate the YAML file against the model for quiz data."""
-import pathlib
+"""Validate data against the model for quiz data."""
 from typing import Any, no_type_check
-
-import yaml
 
 from visailu import (
     INVALID_YAML_RESOURCE,
@@ -88,7 +85,10 @@ def validate_defaults(target_type, maps_to, default_rating) -> tuple[bool, str]:
 
 @no_type_check
 def _validate(data) -> tuple[int, str, Any]:
-    """Validate the data against the model."""
+    """Validate the data against the model and return the completed data.
+
+    Defaults being filled in along the way, so that subsequent publication does not duplicate the logic.
+    """
     try:
         identity = data.get('id')
         title = data.get('title', '')
@@ -99,7 +99,7 @@ def _validate(data) -> tuple[int, str, Any]:
     if not all(aspect for aspect in (identity, title, questions)):
         return 1, MODEL_VALUES_MISSING, data
 
-    for entry in questions:
+    for q_slot, entry in enumerate(questions):
         question = entry.get('question', '')
         answers = entry.get('answers', [])
         meta = effective_meta(data, entry)
@@ -127,7 +127,7 @@ def _validate(data) -> tuple[int, str, Any]:
         if not all(aspect for aspect in (question, answers)):
             return 1, MODEL_QUESTION_INCOMPLETE, data
 
-        for option in answers:
+        for a_slot, option in enumerate(answers):
             answer = option.get('answer', '')
             rating = option.get('rating')
             if rating is None:
@@ -148,6 +148,11 @@ def _validate(data) -> tuple[int, str, Any]:
                 return 1, MODEL_QUESTION_ANSWER_MISSING, data
             if rating is None:
                 return 1, MODEL_QUESTION_ANSWER_MISSING_RATING, data
+            # We are good, so we can eagerly patch to fill in defaults without too much logic as idempotent rollup
+            option['rating'] = rating
+            answers[a_slot] = option
+            questions[q_slot]['answers'] = answers
+            data['questions'] = questions
 
     return 0, '', data
 
