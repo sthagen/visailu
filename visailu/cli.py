@@ -148,6 +148,8 @@ def publish_cmd(  # noqa
     code, message, data = publish_path(path, options=options)
     if code != 0:
         log.error(f'path {path} {message}')
+    else:
+        log.info(message)
 
     raise typer.Exit(code=code)
 

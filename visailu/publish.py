@@ -87,7 +87,7 @@ def etl(data: Any) -> QuizExportType:
     if len(quiz_export) < OUT_QUESTION_COUNT:
         log.warning(f'quiz with too few questions {len(quiz_export)} instead of 10')
 
-    quiz_export
+    return quiz_export
 
 
 @no_type_check
