@@ -8,6 +8,7 @@ from visailu.cli import app
 runner = CliRunner()
 
 TEST_PREFIX = pathlib.Path('test', 'fixtures', 'basic')
+EMPTY_MODEL_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'empty.yml')
 INVALID_YAML_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'invalid-yaml.yml')
 MODEL_META_INVALID_RANGE_DEFAULT_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range-default.yml')
 MODEL_META_INVALID_RANGE_PATH = pathlib.Path(TEST_PREFIX, 'abuse', 'model-meta-invalid-range.yml')
@@ -62,6 +63,11 @@ def test_validate():
 def test_validate_pos():
     result = runner.invoke(app, ['validate', str(MINIMAL_MODEL_PATH)])
     assert result.exit_code == 0
+
+
+def test_validate_empty_file():
+    result = runner.invoke(app, ['validate', str(EMPTY_MODEL_PATH)])
+    assert result.exit_code == 1
 
 
 def test_validate_bad_file():
@@ -143,6 +149,11 @@ def test_publish():
 def test_publish_pos():
     result = runner.invoke(app, ['publish', str(MINIMAL_MODEL_PATH)])
     assert result.exit_code == 0
+
+
+def test_publish_empty_file():
+    result = runner.invoke(app, ['publish', str(EMPTY_MODEL_PATH)])
+    assert result.exit_code == 1
 
 
 def test_publish_bad_file():
