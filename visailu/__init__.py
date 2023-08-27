@@ -34,6 +34,10 @@ TS_FORMAT_PAYLOADS = '%Y-%m-%d %H:%M:%S.%f UTC'
 VERSION = __version__
 VERSION_INFO = __version_info__
 
+# simplistic initial output expectations:
+OUT_QUESTION_COUNT = 10
+OUT_ANSWERS_COUNT = 4
+
 # messages registry:
 INVALID_YAML_RESOURCE = 'is invalid yaml or the resource is inaccessible'
 MODEL_META_INVALID_DEFAULTS = 'contains invalid defaults for scale in meta'
@@ -67,6 +71,8 @@ __all__: List[str] = [
     'MODEL_QUESTION_INVALID_RANGE_VALUE',
     'MODEL_STRUCTURE_UNEXPECTED',
     'MODEL_VALUES_MISSING',
+    'OUT_QUESTION_COUNT',
+    'OUT_ANSWERS_COUNT',
     'log',
 ]
 

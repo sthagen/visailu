@@ -30,6 +30,8 @@ import pathlib
 from typing import Any, Union, no_type_check
 
 from visailu import (
+    OUT_QUESTION_COUNT,
+    OUT_ANSWERS_COUNT,
     MODEL_META_INVALID_DEFAULTS,
     MODEL_META_INVALID_RANGE,
     MODEL_META_INVALID_RANGE_VALUE,
@@ -55,14 +57,14 @@ QuizExportType = list[QuestionExportType]
 
 
 @no_type_check
-def etl(data: Any) -> tuple[int, str, Union[QuizExportType, list]]:
+def etl(data: Any) -> QuizExportType:
     """Extract, load, and transform the data."""
     id_export = 1
     quiz_export: QuestionExportType = []
     questions = data['questions']
     num_questions = len(questions)
-    if num_questions < 10 or 10 < num_questions:
-        problem = 'too few' if num_questions < 10 else 'too many'
+    if num_questions < OUT_QUESTION_COUNT or OUT_QUESTION_COUNT < num_questions:
+        problem = 'too few' if num_questions < OUT_QUESTION_COUNT else 'too many'
         log.warning(f'model with {problem} questions {num_questions} instead of 10')
     for entry in questions:
         question_export = {
@@ -72,20 +74,20 @@ def etl(data: Any) -> tuple[int, str, Union[QuizExportType, list]]:
         }
         answers = entry['answers']
         num_answers = len(answers)
-        if num_answers < 4 or 4 < num_answers:
-            problem = 'too few' if num_answers < 4 else 'too many'
+        if num_answers < OUT_ANSWERS_COUNT or OUT_ANSWERS_COUNT < num_answers:
+            problem = 'too few' if num_answers < OUT_ANSWERS_COUNT else 'too many'
             log.warning(f'model with {problem} answers {num_answers} instead of 4 at question {id_export}')
         for option in answers:
             question_export['options'].append({'answer': option['answer'], 'isCorrect': option['rating']})
         quiz_export.append(question_export)
         id_export += 1
-        if id_export > 10:
+        if id_export > OUT_QUESTION_COUNT:
             break
 
-    if len(quiz_export) < 10:
+    if len(quiz_export) < OUT_QUESTION_COUNT:
         log.warning(f'quiz with too few questions {len(quiz_export)} instead of 10')
 
-    return 0, '', quiz_export
+    quiz_export
 
 
 @no_type_check
@@ -95,10 +97,7 @@ def publish_path(path: str, options=None) -> tuple[int, str, Any]:
     if code != 0:
         return code, message, data
 
-    code, message, quiz = etl(data)
-    if code != 0:
-        return code, 'Failed on publish', quiz
-
+    quiz = etl(data)
     build_path = pathlib.Path('build')
     build_path.mkdir(parents=True, exist_ok=True)
     target_path = build_path / (pathlib.Path(path).stem + '.json')
