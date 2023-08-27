@@ -16,9 +16,8 @@ from visailu import (
     MODEL_QUESTION_INVALID_RANGE_VALUE,
     MODEL_STRUCTURE_UNEXPECTED,
     MODEL_VALUES_MISSING,
-    log,
 )
-from visailu.verify import verify as verify_path
+from visailu.verify import verify_path
 
 
 @no_type_check
@@ -55,7 +54,7 @@ def parse_scale_range(scale) -> tuple[bool | float | None, list[Any]]:
 
 
 @no_type_check
-def effective_meta(data, entry):
+def effective_meta(data, entry) -> dict[str:Any]:
     """Walk upwards until meta discovered."""
     meta = entry.get('meta')
     if meta is None:
@@ -64,7 +63,7 @@ def effective_meta(data, entry):
 
 
 @no_type_check
-def parse_defaults(meta):
+def parse_defaults(meta) -> tuple[bool, list[Any], Any]:
     """Parse the effective defaults from the meta data."""
     defaults = meta.get('defaults')
     if defaults:
@@ -75,7 +74,7 @@ def parse_defaults(meta):
 
 
 @no_type_check
-def validate_defaults(target_type, maps_to, default_rating):
+def validate_defaults(target_type, maps_to, default_rating) -> tuple[bool, str]:
     """Validate the default for consistency."""
     if target_type is None or not maps_to:
         return False, MODEL_META_INVALID_RANGE
@@ -94,22 +93,18 @@ def validate_defaults(target_type, maps_to, default_rating):
     return True, ''
 
 
-def _validate(path: str) -> tuple[bool, str]:
+@no_type_check
+def _validate(data) -> tuple[int, str, Any]:
     """Validate the data against the model."""
-    try:
-        data = load(path)
-    except RuntimeError:  # pragma: no cover
-        return False, INVALID_YAML_RESOURCE
-
     try:
         identity = data.get('id')
         title = data.get('title', '')
         questions = data.get('questions', [])
     except (AttributeError, RuntimeError):
-        return False, MODEL_STRUCTURE_UNEXPECTED
+        return 1, MODEL_STRUCTURE_UNEXPECTED, data
 
     if not all(aspect for aspect in (identity, title, questions)):
-        return False, MODEL_VALUES_MISSING
+        return 1, MODEL_VALUES_MISSING, data
 
     for entry in questions:
         question = entry.get('question', '')
@@ -117,27 +112,27 @@ def _validate(path: str) -> tuple[bool, str]:
         meta = effective_meta(data, entry)
         target_type, maps_to, default_rating = parse_defaults(meta)
         if target_type is None:
-            return False, MODEL_META_INVALID_DEFAULTS
+            return 1, MODEL_META_INVALID_DEFAULTS, data
         ok, message = validate_defaults(target_type, maps_to, default_rating)
         if not ok:
-            return ok, message
+            return 1, message, data
         if target_type is None or not maps_to:
-            return False, MODEL_META_INVALID_RANGE
+            return 1, MODEL_META_INVALID_RANGE, data
         if target_type is bool:
             if default_rating not in maps_to:
-                return False, MODEL_META_INVALID_RANGE_VALUE
+                return 1, MODEL_META_INVALID_RANGE_VALUE, data
         if target_type is float:
             try:
                 val = float(default_rating)
                 if not isinstance(default_rating, (int, float)) or default_rating is False or default_rating is True:
-                    return False, MODEL_META_INVALID_RANGE_VALUE
+                    return 1, MODEL_META_INVALID_RANGE_VALUE, data
             except (TypeError, ValueError):
-                return False, MODEL_META_INVALID_RANGE_VALUE
+                return 1, MODEL_META_INVALID_RANGE_VALUE, data
             if not maps_to[0] <= val <= maps_to[1]:
-                return False, MODEL_META_INVALID_RANGE_VALUE
+                return 1, MODEL_META_INVALID_RANGE_VALUE, data
 
         if not all(aspect for aspect in (question, answers)):
-            return False, MODEL_QUESTION_INCOMPLETE
+            return 1, MODEL_QUESTION_INCOMPLETE, data
 
         for option in answers:
             answer = option.get('answer', '')
@@ -146,34 +141,29 @@ def _validate(path: str) -> tuple[bool, str]:
                 rating = default_rating
             if target_type is bool:
                 if rating not in maps_to:
-                    return False, MODEL_QUESTION_INVALID_RANGE
+                    return 1, MODEL_QUESTION_INVALID_RANGE, data
             if target_type is float:
                 try:
                     val = float(rating)
                     if not isinstance(rating, (int, float)) or rating is False or rating is True:
-                        return False, MODEL_QUESTION_INVALID_RANGE_VALUE
+                        return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, data
                 except (TypeError, ValueError):
-                    return False, MODEL_QUESTION_INVALID_RANGE_VALUE
+                    return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, data
                 if not maps_to[0] <= val <= maps_to[1]:
-                    return False, MODEL_QUESTION_INVALID_RANGE_VALUE
+                    return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, data
             if not answer:
-                return False, MODEL_QUESTION_ANSWER_MISSING
+                return 1, MODEL_QUESTION_ANSWER_MISSING, data
             if rating is None:
-                return False, MODEL_QUESTION_ANSWER_MISSING_RATING
+                return 1, MODEL_QUESTION_ANSWER_MISSING_RATING, data
 
-    return True, ''
+    return 0, '', data
 
 
 @no_type_check
-def validate(path: str, options=None) -> tuple[bool, str]:
+def validate_path(path: str, options=None) -> tuple[int, str, Any]:
     """Drive the model validation."""
-    if not verify_path(path):
-        return False, INVALID_YAML_RESOURCE
+    code, message, data = verify_path(path)
+    if code != 0:
+        return code, INVALID_YAML_RESOURCE, data
 
-    ok, message = _validate(path)
-    if not ok:
-        log.error(f'path({path}) {message}')
-        return ok, message
-
-    log.info(f'path({path}) is valid quiz data')
-    return ok, ''
+    return _validate(data)

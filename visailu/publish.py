@@ -32,7 +32,6 @@ from typing import Any, Union, no_type_check
 import yaml
 
 from visailu import (
-    INVALID_YAML_RESOURCE,
     MODEL_META_INVALID_DEFAULTS,
     MODEL_META_INVALID_RANGE,
     MODEL_META_INVALID_RANGE_VALUE,
@@ -45,8 +44,7 @@ from visailu import (
     MODEL_VALUES_MISSING,
     log,
 )
-from visailu.validate import validate as validate_path
-from visailu.verify import verify as verify_path
+from visailu.validate import validate_path
 
 AnswerExportType = list[dict[str, Union[str, bool]]]
 QuestionExportType = dict[str, Union[int, str, AnswerExportType]]
@@ -127,22 +125,17 @@ def validate_defaults(target_type, maps_to, default_rating):
 
 
 @no_type_check
-def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
+def etl(data: Any) -> tuple[int, str, Union[QuizExportType, list]]:
     """Extract, load, and transform the data."""
-    try:
-        data = load(path)
-    except RuntimeError:  # pragma: no cover
-        return False, INVALID_YAML_RESOURCE, []
-
     try:
         identity = data.get('id')
         title = data.get('title', '')
         questions = data.get('questions', [])
     except (AttributeError, RuntimeError):
-        return False, MODEL_STRUCTURE_UNEXPECTED, []
+        return 1, MODEL_STRUCTURE_UNEXPECTED, []
 
     if not all(aspect for aspect in (identity, title, questions)):
-        return False, MODEL_VALUES_MISSING, []
+        return 1, MODEL_VALUES_MISSING, []
 
     id_export = 1
     quiz_export: QuestionExportType = []
@@ -156,27 +149,27 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
         meta = effective_meta(data, entry)
         target_type, maps_to, default_rating = parse_defaults(meta)
         if target_type is None:
-            return False, MODEL_META_INVALID_DEFAULTS, []
+            return 1, MODEL_META_INVALID_DEFAULTS, []
         ok, message = validate_defaults(target_type, maps_to, default_rating)
         if not ok:
-            return ok, message
+            return 1, message, []
         if target_type is None or not maps_to:
-            return False, MODEL_META_INVALID_RANGE, []
+            return 1, MODEL_META_INVALID_RANGE, []
         if target_type is bool:
             if default_rating not in maps_to:
-                return False, MODEL_META_INVALID_RANGE_VALUE, []
+                return 1, MODEL_META_INVALID_RANGE_VALUE, []
         if target_type is float:
             try:
                 val = float(default_rating)
                 if not isinstance(default_rating, (int, float)) or default_rating is False or default_rating is True:
-                    return False, MODEL_META_INVALID_RANGE_VALUE, []
+                    return 1, MODEL_META_INVALID_RANGE_VALUE, []
             except (TypeError, ValueError):
-                return False, MODEL_META_INVALID_RANGE_VALUE, []
+                return 1, MODEL_META_INVALID_RANGE_VALUE, []
             if not maps_to[0] <= val <= maps_to[1]:
-                return False, MODEL_META_INVALID_RANGE_VALUE, []
+                return 1, MODEL_META_INVALID_RANGE_VALUE, []
 
         if not all(aspect for aspect in (question, answers)):
-            return False, MODEL_QUESTION_INCOMPLETE, []
+            return 1, MODEL_QUESTION_INCOMPLETE, []
 
         question_export = {
             'id': id_export,
@@ -194,20 +187,20 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
                 rating = default_rating
             if target_type is bool:
                 if rating not in maps_to:
-                    return False, MODEL_QUESTION_INVALID_RANGE, []
+                    return 1, MODEL_QUESTION_INVALID_RANGE, []
             if target_type is float:
                 try:
                     val = float(rating)
                     if not isinstance(rating, (int, float)) or rating is False or rating is True:
-                        return False, MODEL_QUESTION_INVALID_RANGE_VALUE, []
+                        return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, []
                 except (TypeError, ValueError):
-                    return False, MODEL_QUESTION_INVALID_RANGE_VALUE, []
+                    return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, []
                 if not maps_to[0] <= val <= maps_to[1]:
-                    return False, MODEL_QUESTION_INVALID_RANGE_VALUE, []
+                    return 1, MODEL_QUESTION_INVALID_RANGE_VALUE, []
             if not answer:
-                return False, MODEL_QUESTION_ANSWER_MISSING, []
+                return 1, MODEL_QUESTION_ANSWER_MISSING, []
             if rating is None:
-                return False, MODEL_QUESTION_ANSWER_MISSING_RATING, []
+                return 1, MODEL_QUESTION_ANSWER_MISSING_RATING, []
             question_export['options'].append({'answer': answer, 'isCorrect': rating})
         quiz_export.append(question_export)
         id_export += 1
@@ -217,29 +210,24 @@ def etl(path: str) -> tuple[bool, str, Union[QuizExportType, list]]:
     if len(quiz_export) < 10:
         log.warning(f'quiz with too few questions {len(quiz_export)} instead of 10')
 
-    return True, '', quiz_export
+    return 0, '', quiz_export
 
 
 @no_type_check
-def publish(path: str, options=None) -> tuple[bool, str]:
+def publish_path(path: str, options=None) -> tuple[int, str, Any]:
     """Drive the model publication."""
-    if not verify_path(path):
-        return False, INVALID_YAML_RESOURCE
+    code, message, data = validate_path(path)
+    if code != 0:
+        return code, message, data
 
-    ok, message = validate_path(path)
-    if not ok:
-        return ok, message
-
-    ok, message, quiz = etl(path)
-    if not ok:
-        log.error(f'ETL::path({path}) {message}')
-        return False, 'Failed on publish'
+    code, message, quiz = etl(data)
+    if code != 0:
+        return code, 'Failed on publish', quiz
 
     build_path = pathlib.Path('build')
     build_path.mkdir(parents=True, exist_ok=True)
     target_path = build_path / (pathlib.Path(path).stem + '.json')
     with target_path.open('wt', encoding='utf-8') as handle:
         json.dump(quiz, handle, indent=2)
-    log.info(f'published quiz data at {target_path} (from model at {path})')
 
-    return True, ''
+    return 0, f'published quiz data at {target_path} (from model at {path})', quiz

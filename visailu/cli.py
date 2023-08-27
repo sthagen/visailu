@@ -5,9 +5,9 @@ import pathlib
 import typer
 
 from visailu import APP_NAME, QUIET, __version__ as APP_VERSION, log
-from visailu.publish import publish as publish_path
-from visailu.validate import validate as validate_path
-from visailu.verify import verify as verify_path
+from visailu.publish import publish_path
+from visailu.validate import validate_path
+from visailu.verify import verify_path
 
 app = typer.Typer(
     add_completion=False,
@@ -87,7 +87,7 @@ def _verify_call_vector(
 
 
 @app.command('verify')
-def verify(  # noqa
+def verify_cmd(  # noqa
     doc_path_pos: str = typer.Argument(''),
     doc_path: str = DocumentPath,
     verbose: bool = Verbosity,
@@ -97,18 +97,19 @@ def verify(  # noqa
     Verify the model data against YAML syntax.
     """
     code, message, path, options = _verify_call_vector(doc_path, doc_path_pos, verbose, strict)
-    log.error(f'{code=}, {message=}')
     if code:
         log.error(message)
         raise typer.Exit(code=code)
 
-    if verify_path(path, options=options):
-        raise typer.Exit(code=0)
-    raise typer.Exit(code=1)
+    code, message, data = verify_path(path, options=options)
+    if code != 0:
+        log.error(message)
+
+    raise typer.Exit(code=code)
 
 
 @app.command('validate')
-def validate(  # noqa
+def validate_cmd(  # noqa
     doc_path_pos: str = typer.Argument(''),
     doc_path: str = DocumentPath,
     verbose: bool = Verbosity,
@@ -122,15 +123,15 @@ def validate(  # noqa
         log.error(message)
         raise typer.Exit(code=code)
 
-    ok, _ = validate_path(path, options=options)
+    code, message, data = validate_path(path, options=options)
+    if code != 0:
+        log.error(f'path {path} {message}')
 
-    if ok:
-        raise typer.Exit(code=0)
-    raise typer.Exit(code=1)
+    raise typer.Exit(code=code)
 
 
 @app.command('publish')
-def publish(  # noqa
+def publish_cmd(  # noqa
     doc_path_pos: str = typer.Argument(''),
     doc_path: str = DocumentPath,
     verbose: bool = Verbosity,
@@ -144,11 +145,11 @@ def publish(  # noqa
         log.error(message)
         raise typer.Exit(code=code)
 
-    ok, _ = publish_path(path, options=options)
+    code, message, data = publish_path(path, options=options)
+    if code != 0:
+        log.error(f'path {path} {message}')
 
-    if ok:
-        raise typer.Exit(code=0)
-    raise typer.Exit(code=1)
+    raise typer.Exit(code=code)
 
 
 @app.command('version')
