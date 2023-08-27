@@ -698,3 +698,10 @@ The quiz export file `build/ten.json` has the following content:
   }
 ]
 ```
+
+### Version
+
+```console
+❯ visailu version
+Quiz (Finnish: visailu) data operations. version 2023.8.25+parent.fb1e0e78
+```
