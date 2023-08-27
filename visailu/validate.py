@@ -1,5 +1,5 @@
 """Validate data against the model for quiz data."""
-from typing import Any, no_type_check
+from typing import Any, Union, no_type_check
 
 from visailu import (
     INVALID_YAML_RESOURCE,
@@ -18,7 +18,7 @@ from visailu.verify import verify_path
 
 
 @no_type_check
-def parse_scale_range(scale) -> tuple[bool | float | None, list[Any]]:
+def parse_scale_range(scale) -> tuple[Union[bool, float, None], list[Any]]:
     """Parse a scale range declaration.
     Returns a tuple (ordered pair) of target type and target range
     target range: Expecting either a list (ordered pair) with low and high or
