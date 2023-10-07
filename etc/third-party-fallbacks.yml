@@ -42,6 +42,7 @@ authors:
   navigaattori: Stefan Hagen
   numcodecs: Alistair Miles
   packaging: Donald Stufft
+  platformdirs: Bernát Gábor
   pypandoc: Juho Vepsäläinen
   pyparsing: Paul McGuire
   "scikit-learn": Andreas Mueller
