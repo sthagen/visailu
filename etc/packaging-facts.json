@@ -1,0 +1,195 @@
+{
+  "info": {
+    "author": "",
+    "author_email": "Stefan Hagen <stefan@hagen.link>",
+    "bugtrack_url": null,
+    "classifiers": [
+      "Development Status :: 3 - Alpha",
+      "Intended Audience :: Developers",
+      "License :: OSI Approved :: MIT License",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.9"
+    ],
+    "description": "# Visailu \n\nQuiz (Finnish: visailu) data operations.\n\n[License: MIT](https://git.sr.ht/~sthagen/visailu/tree/default/item/LICENSE)\n\nThird party dependencies are documented in the folder [third-party](docs/third-party/README.md).\n\n[![version](https://img.shields.io/pypi/v/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)\n[![downloads](https://static.pepy.tech/badge/visailu/month)](https://pepy.tech/project/visailu)\n[![wheel](https://img.shields.io/pypi/wheel/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)\n[![supported-versions](https://img.shields.io/pypi/pyversions/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)\n[![supported-implementations](https://img.shields.io/pypi/implementation/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)\n[![maintenance-status](https://img.shields.io/github/commit-activity/y/sthagen/visailu.svg?style=flat)](https://git.sr.ht/~sthagen/visailu/log)\n\n## Documentation\n\nUser and developer [documentation of visailu](https://codes.dilettant.life/docs/visailu).\n\n## Bug Tracker\n\nAny feature requests or bug reports shall go to the [todos of visailu](https://todo.sr.ht/~sthagen/visailu).\n\n## Primary Source repository\n\nThe main source of `visailu` is on a mountain in central Switzerland.\nWe use distributed version control (git).\nThere is no central hub.\nEvery clone can become a new source for the benefit of all.\nThe preferred public clones of `visailu` are:\n\n* [on codeberg](https://codeberg.org/sthagen/visailu) - a democratic community-driven, non-profit software development platform operated by Codeberg e.V.\n* [at sourcehut](https://git.sr.ht/~sthagen/visailu) - a collection of tools useful for software development.\n\n## Contributions\n\nPlease do not submit \"pull requests\" (I found no way to disable that \"feature\" on GitHub).\nIf you like to share small changes under the repositories license please kindly do so by sending a patchset.\nYou can either send such a patchset per email using [git send-email](https://git-send-email.io) or\nif you are a sourcehut user by selecting \"Prepare a patchset\" on the summary page of your fork at [sourcehut](https://git.sr.ht/).\n\n# Status\n\nExperimental.\n\n**Note** The default branch is `default`.\n",
+    "description_content_type": "text/markdown",
+    "docs_url": null,
+    "download_url": "",
+    "downloads": {
+      "last_day": -1,
+      "last_month": -1,
+      "last_week": -1
+    },
+    "home_page": "",
+    "keywords": "developer-tools,devops",
+    "license": "",
+    "maintainer": "",
+    "maintainer_email": "Stefan Hagen <stefan@hagen.link>",
+    "name": "visailu",
+    "package_url": "https://pypi.org/project/visailu/",
+    "platform": null,
+    "project_url": "https://pypi.org/project/visailu/",
+    "project_urls": {
+      "Bug-Tracker": "https://todo.sr.ht/~sthagen/visailu",
+      "Documentation": "https://codes.dilettant.life/docs/visailu",
+      "Homepage": "https://git.sr.ht/~sthagen/visailu",
+      "Source-Code": "https://git.sr.ht/~sthagen/visailu",
+      "Test-Coverage": "https://codes.dilettant.life/coverage/visailu"
+    },
+    "release_url": "https://pypi.org/project/visailu/2023.8.27/",
+    "requires_dist": [
+      "PyYAML >=6.0.1",
+      "typer >=0.9.0",
+      "black ; extra == 'dev'",
+      "coverage ; extra == 'dev'",
+      "hypothesis ; extra == 'dev'",
+      "mypy ; extra == 'dev'",
+      "pytest ; extra == 'dev'",
+      "pytest-cov ; extra == 'dev'",
+      "pytest-flake8 ; extra == 'dev'",
+      "ruff ; extra == 'dev'"
+    ],
+    "requires_python": ">=3.9",
+    "summary": "Quiz (Finnish: visailu) data operations.",
+    "version": "2023.8.27",
+    "yanked": false,
+    "yanked_reason": null
+  },
+  "last_serial": 19471599,
+  "releases": {
+    "2023.8.25": [
+      {
+        "comment_text": "",
+        "digests": {
+          "blake2b_256": "2d35e0b51327caf25b59d33c6deae85bb1cec238964c244dc22eca8e499585fa",
+          "md5": "14abcbbe039b9cafdeef8f2903e2ff35",
+          "sha256": "5379282a02534b75f95f4d84118f660b79c764c68c17fbb4dfc2d17f23217c8e"
+        },
+        "downloads": -1,
+        "filename": "visailu-2023.8.25-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "14abcbbe039b9cafdeef8f2903e2ff35",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.9",
+        "size": 4404,
+        "upload_time": "2023-08-25T19:17:09",
+        "upload_time_iso_8601": "2023-08-25T19:17:09.266008Z",
+        "url": "https://files.pythonhosted.org/packages/2d/35/e0b51327caf25b59d33c6deae85bb1cec238964c244dc22eca8e499585fa/visailu-2023.8.25-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "digests": {
+          "blake2b_256": "37c868465cec2cf85fa032542133da1c45ed7597b55793c4cf4dee07b1ea4601",
+          "md5": "ddd0c829b7d2ff58dc7c0ff266c4e18a",
+          "sha256": "92927c341d6cb0426650986ed87c261dffe61d38a4b7511768fa24b50e26b348"
+        },
+        "downloads": -1,
+        "filename": "visailu-2023.8.25.tar.gz",
+        "has_sig": false,
+        "md5_digest": "ddd0c829b7d2ff58dc7c0ff266c4e18a",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.9",
+        "size": 4633,
+        "upload_time": "2023-08-25T19:17:10",
+        "upload_time_iso_8601": "2023-08-25T19:17:10.461763Z",
+        "url": "https://files.pythonhosted.org/packages/37/c8/68465cec2cf85fa032542133da1c45ed7597b55793c4cf4dee07b1ea4601/visailu-2023.8.25.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "2023.8.27": [
+      {
+        "comment_text": "",
+        "digests": {
+          "blake2b_256": "c89e3a87f8910308800bd28ccb0fbc0727a24e2795d0854b04006c210df7414f",
+          "md5": "6ca8e74e8af407fa1a6de4b06720d59f",
+          "sha256": "969160903ccf6cb17198313fef1f6d0314341b226b243282e2611c7f91f79473"
+        },
+        "downloads": -1,
+        "filename": "visailu-2023.8.27-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "6ca8e74e8af407fa1a6de4b06720d59f",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.9",
+        "size": 10646,
+        "upload_time": "2023-08-27T13:54:47",
+        "upload_time_iso_8601": "2023-08-27T13:54:47.188329Z",
+        "url": "https://files.pythonhosted.org/packages/c8/9e/3a87f8910308800bd28ccb0fbc0727a24e2795d0854b04006c210df7414f/visailu-2023.8.27-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "digests": {
+          "blake2b_256": "6729c22b7da818871d4a722fe3a6d0cefddc115d33537849f28566894982c6b1",
+          "md5": "929b747b598020379e74771ff0796902",
+          "sha256": "26649050d07b557a1a40dcc02558f2b17460dcb21148dedee715003bf89ea44a"
+        },
+        "downloads": -1,
+        "filename": "visailu-2023.8.27.tar.gz",
+        "has_sig": false,
+        "md5_digest": "929b747b598020379e74771ff0796902",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.9",
+        "size": 11814,
+        "upload_time": "2023-08-27T13:54:48",
+        "upload_time_iso_8601": "2023-08-27T13:54:48.745700Z",
+        "url": "https://files.pythonhosted.org/packages/67/29/c22b7da818871d4a722fe3a6d0cefddc115d33537849f28566894982c6b1/visailu-2023.8.27.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ]
+  },
+  "urls": [
+    {
+      "comment_text": "",
+      "digests": {
+        "blake2b_256": "c89e3a87f8910308800bd28ccb0fbc0727a24e2795d0854b04006c210df7414f",
+        "md5": "6ca8e74e8af407fa1a6de4b06720d59f",
+        "sha256": "969160903ccf6cb17198313fef1f6d0314341b226b243282e2611c7f91f79473"
+      },
+      "downloads": -1,
+      "filename": "visailu-2023.8.27-py3-none-any.whl",
+      "has_sig": false,
+      "md5_digest": "6ca8e74e8af407fa1a6de4b06720d59f",
+      "packagetype": "bdist_wheel",
+      "python_version": "py3",
+      "requires_python": ">=3.9",
+      "size": 10646,
+      "upload_time": "2023-08-27T13:54:47",
+      "upload_time_iso_8601": "2023-08-27T13:54:47.188329Z",
+      "url": "https://files.pythonhosted.org/packages/c8/9e/3a87f8910308800bd28ccb0fbc0727a24e2795d0854b04006c210df7414f/visailu-2023.8.27-py3-none-any.whl",
+      "yanked": false,
+      "yanked_reason": null
+    },
+    {
+      "comment_text": "",
+      "digests": {
+        "blake2b_256": "6729c22b7da818871d4a722fe3a6d0cefddc115d33537849f28566894982c6b1",
+        "md5": "929b747b598020379e74771ff0796902",
+        "sha256": "26649050d07b557a1a40dcc02558f2b17460dcb21148dedee715003bf89ea44a"
+      },
+      "downloads": -1,
+      "filename": "visailu-2023.8.27.tar.gz",
+      "has_sig": false,
+      "md5_digest": "929b747b598020379e74771ff0796902",
+      "packagetype": "sdist",
+      "python_version": "source",
+      "requires_python": ">=3.9",
+      "size": 11814,
+      "upload_time": "2023-08-27T13:54:48",
+      "upload_time_iso_8601": "2023-08-27T13:54:48.745700Z",
+      "url": "https://files.pythonhosted.org/packages/67/29/c22b7da818871d4a722fe3a6d0cefddc115d33537849f28566894982c6b1/visailu-2023.8.27.tar.gz",
+      "yanked": false,
+      "yanked_reason": null
+    }
+  ],
+  "vulnerabilities": []
+}
