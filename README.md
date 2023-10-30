@@ -8,7 +8,7 @@ Quiz (Finnish: visailu) data operations.
 [![Configuration](docs/badges/configuration-sbom.svg)](https://git.sr.ht/~sthagen/visailu/tree/default/item/docs/third-party/README.md)
 
 [![Version](https://img.shields.io/pypi/v/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
-[![Downloads](https://static.pepy.tech/badge/visailu/month)](https://pepy.tech/project/visailu)
+[![Downloads](docs/badges/downloads-per-month.svg)](https://pepy.tech/project/visailu)
 [![Supported Versions](https://img.shields.io/pypi/pyversions/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
 [![Maintenance Status](docs/badges/commits-per-year.svg)](https://git.sr.ht/~sthagen/visailu/log)
 
