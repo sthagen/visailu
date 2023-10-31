@@ -9,7 +9,7 @@ Quiz (Finnish: visailu) data operations.
 
 [![Version](badges/latest-release.svg)](https://pypi.python.org/pypi/visailu/)
 [![Downloads](badges/downloads-per-month.svg)](https://pepy.tech/project/visailu)
-[![Supported Versions](https://img.shields.io/pypi/pyversions/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
+[![Python](badges/python-versions.svg)](https://pypi.python.org/pypi/visailu/)
 [![Maintenance Status](badges/commits-per-year.svg)](https://git.sr.ht/~sthagen/visailu/log)
 
 ## Bug Tracker
