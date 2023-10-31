@@ -7,7 +7,7 @@ Quiz (Finnish: visailu) data operations.
 [![Export Classification Control Number (ECCN)](badges/export-control-classification-number_eccn-ear99-neutral.svg)](https://git.sr.ht/~sthagen/visailu/tree/default/item/EXPORT-CONTROL-CLASSIFICATION-NUMBER)
 [![Configuration](badges/configuration-sbom.svg)](third-party/index.html)
 
-[![Version](https://img.shields.io/pypi/v/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
+[![Version](badges/latest-release.svg)](https://pypi.python.org/pypi/visailu/)
 [![Downloads](badges/downloads-per-month.svg)](https://pepy.tech/project/visailu)
 [![Supported Versions](https://img.shields.io/pypi/pyversions/visailu.svg?style=flat)](https://pypi.python.org/pypi/visailu/)
 [![Maintenance Status](badges/commits-per-year.svg)](https://git.sr.ht/~sthagen/visailu/log)
