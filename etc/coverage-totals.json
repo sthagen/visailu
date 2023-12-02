@@ -1,7 +1,7 @@
 {
   "visailu": {
-    "version": "7.3.2",
-    "timestamp": "2023-12-02T15:38:38.304159",
+    "coverage_tool_version": "7.3.2",
+    "timestamp": "2023-12-02 16:34:52 +00:00",
     "branch_coverage": true,
     "show_contexts": true,
     "covered_lines": 277,
@@ -13,6 +13,25 @@
     "num_branches": 148,
     "num_partial_branches": 14,
     "covered_branches": 134,
-    "missing_branches": 14
+    "missing_branches": 14,
+    "node_id": "c79891e5-aabf-3a83-95b9-588edcd8327f",
+    "nfiles": 6,
+    "files": [
+      "visailu/__init__.py",
+      "visailu/api.py",
+      "visailu/cli.py",
+      "visailu/publish.py",
+      "visailu/validate.py",
+      "visailu/verify.py"
+    ],
+    "blake3": "07cb389ebf3a8e908d3aabead9997a47767a7884506422bf40960f4ba375b488",
+    "blake2": "3931c6d3a84e213ebf8f8a2bde8ce0f5042a5601250fba3c33b7f9d1762816b94f30c3fb8ecc668e0309956b438dd0858fc50d51fb1fc8d87888a284d4638c53",
+    "sha512": "cd7b952c0bc8847889f331a5fb65ade23de96c36e2aa82fcfb99e1f904c188558b35777b18d79d87d80fc8715ccba441f6a4c3ead276098f02177c0e8b340be1",
+    "sha384": "4565031d94355f6a6487c146a687920e8cf48c7c15057c79f2a815dc6e2816d26d008b83b7e9edc46df173e13a4beca7",
+    "sha256": "25b7d70b79218c71a55a5e4bf3fca834b427233b12616cf7cd2cef6c44b4fde7",
+    "sha1": "9c9f77d722f0048ff7a7916c9e7bfe0277180028",
+    "md5": "11a77ac694e6f1bd6e8ed5d27064ae7e",
+    "python_version": "3.11.4",
+    "entropy": 5.0697
   }
 }
