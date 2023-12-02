@@ -1,0 +1,18 @@
+{
+  "visailu": {
+    "version": "7.3.2",
+    "timestamp": "2023-12-02T15:38:38.304159",
+    "branch_coverage": true,
+    "show_contexts": true,
+    "covered_lines": 277,
+    "num_statements": 295,
+    "percent_covered": 92.7765237020316,
+    "percent_covered_display": "92.78",
+    "missing_lines": 18,
+    "excluded_lines": 1,
+    "num_branches": 148,
+    "num_partial_branches": 14,
+    "covered_branches": 134,
+    "missing_branches": 14
+  }
+}
