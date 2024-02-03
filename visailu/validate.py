@@ -1,4 +1,5 @@
 """Validate data against the model for quiz data."""
+
 from typing import Any, Union, no_type_check
 
 from visailu import (

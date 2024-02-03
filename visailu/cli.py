@@ -1,4 +1,5 @@
 """Command line interface for quiz (Finnish: visailu) data operations."""
+
 import logging
 import pathlib
 

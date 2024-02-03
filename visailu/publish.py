@@ -25,6 +25,7 @@ Target format is a naive 10 question array with 4 options each array:
   },
 ]
 """
+
 import json
 import pathlib
 from typing import Any, Union, no_type_check
@@ -32,24 +33,9 @@ from typing import Any, Union, no_type_check
 from visailu import (
     OUT_QUESTION_COUNT,
     OUT_ANSWERS_COUNT,
-    MODEL_META_INVALID_DEFAULTS,
-    MODEL_META_INVALID_RANGE,
-    MODEL_META_INVALID_RANGE_VALUE,
-    MODEL_QUESTION_ANSWER_MISSING,
-    MODEL_QUESTION_ANSWER_MISSING_RATING,
-    MODEL_QUESTION_INCOMPLETE,
-    MODEL_QUESTION_INVALID_RANGE,
-    MODEL_QUESTION_INVALID_RANGE_VALUE,
-    MODEL_STRUCTURE_UNEXPECTED,
-    MODEL_VALUES_MISSING,
     log,
 )
-from visailu.validate import (
-    effective_meta,
-    parse_defaults,
-    validate_defaults,
-    validate_path,
-)
+from visailu.validate import validate_path
 
 AnswerExportType = list[dict[str, Union[str, bool]]]
 QuestionExportType = dict[str, Union[int, str, AnswerExportType]]

@@ -1,4 +1,5 @@
 """Verify the YAML file for quiz data."""
+
 import pathlib
 from typing import Any, no_type_check
 

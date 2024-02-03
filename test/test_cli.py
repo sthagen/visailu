@@ -1,7 +1,6 @@
 import json
 import pathlib
 
-import pytest
 from typer.testing import CliRunner
 
 import visailu

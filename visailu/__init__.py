@@ -1,4 +1,5 @@
 """Quiz (Finnish: visailu) data operations."""
+
 import datetime as dti
 import logging
 import os
