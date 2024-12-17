@@ -3,7 +3,7 @@
     {
       "category": "3.10",
       "date": "2024-06",
-      "downloads": 93
+      "downloads": 74
     },
     {
       "category": "3.10",
@@ -33,12 +33,12 @@
     {
       "category": "3.10",
       "date": "2024-12",
-      "downloads": 104
+      "downloads": 128
     },
     {
       "category": "3.11",
       "date": "2024-06",
-      "downloads": 95
+      "downloads": 73
     },
     {
       "category": "3.11",
@@ -68,12 +68,12 @@
     {
       "category": "3.11",
       "date": "2024-12",
-      "downloads": 104
+      "downloads": 128
     },
     {
       "category": "3.12",
       "date": "2024-06",
-      "downloads": 93
+      "downloads": 76
     },
     {
       "category": "3.12",
@@ -103,7 +103,7 @@
     {
       "category": "3.12",
       "date": "2024-12",
-      "downloads": 104
+      "downloads": 128
     },
     {
       "category": "3.9",
@@ -158,7 +158,7 @@
     {
       "category": "null",
       "date": "2024-12",
-      "downloads": 10
+      "downloads": 14
     }
   ],
   "package": "visailu",
